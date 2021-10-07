@@ -4,6 +4,7 @@
 
   import Card from './Card.svelte';
   import type { Question } from './types/question.type';
+  import Modal from './Modal.svelte';
 
   const CATEGORIES = {
     0: 'All',
@@ -18,57 +19,85 @@
   let currentCategory = 0;
   let currentQuestion: Question = {
     index: 0,
-    question: 'What is the most spontaneous thing you have ever done?',
-    tags: 'icebreakers'
+    question: '',
+    tags: ''
   };
+  let loading = true;
+  let showAbout = false;
 
   onMount(() => {
+    loading = true;
     xCoord = menuw / 2 - 60;
     Papa.parse('/assets/questions.csv', {
       delimiter: '|',
       header: true,
       download: true,
       complete: function (results) {
-        console.log(results.data);
-        questions = results.data.filter((q: { index: number; }) => q.index);
+        questions = results.data.filter((q: { index: number }) => q.index);
         currentQuestion = getQuestion(currentCategory);
       }
     });
   });
 
+  const toggleAbout = () => {
+    showAbout = !showAbout;
+  };
+
   const selectCategory = (ind: number) => {
     currentCategory = ind;
     xCoord = menuw / 2 - 60 - ind * 120;
-    console.log(menuw);
+    currentQuestion = getQuestion(ind);
   };
 
   const getQuestion = (category: number) => {
+    loading = true;
     if (category === 0) {
       const randomIndex = Math.floor(Math.random() * questions.length + 1);
+      loading = false;
       return questions[randomIndex];
     }
     const filteredQuestions = questions.filter((q) =>
-      q.tags.includes(CATEGORIES[category].toLower())
+      q.tags.includes(CATEGORIES[category].toLowerCase())
     );
     const randomIndex = Math.floor(
       Math.random() * filteredQuestions.length + 1
     );
+    loading = false;
     return filteredQuestions[randomIndex];
   };
 </script>
 
 <main class="flex flex-col justify-between h-full">
+  {#if showAbout}
+    <div class="absolute p-6 right-0 modal-setup"><Modal /></div>
+  {/if}
   <div class="w-full grid grid-cols-3 p-10 pb-4 md:p-6 md:pb-2">
-    <div><img src="/assets/filter.svg" alt="Filter icon" class="icons" /></div>
+    <div>
+      <img src="/assets/filter.svg" alt="Filter icon" class="icons hidden" />
+    </div>
     <div class="w-full text-center">
       <h2 class="text-2xl font-semibold">icepick.</h2>
     </div>
-    <div class="flex items-end hidden md:flex md:flex-col">
-      <h3 class="text-4xl font-bold transition-all">{currentQuestion.index || 0}</h3>
-      <div class="inline-block items-baseline">
-        <p class="inline-block pl-2 text-lg pb-1 font-bold">
-          /{questions.length}
-        </p>
+    <div class="flex justify-end">
+      <img
+        src="assets/vercel.svg"
+        alt="Icepick is powered by Vercel. "
+        class="w-3/12 opacity-80 md:hidden"
+      />
+      <div class="w-full flex items-end hidden md:flex md:flex-col">
+        {#if loading}
+          <div class="shimmer shimmer-bg h-6 w-16" />
+          <div class="shimmer shimmer-bg h-4 w-10 my-1" />
+        {:else}
+          <h3 class="text-4xl font-bold transition-all">
+            {currentQuestion.index || 0}
+          </h3>
+          <div class="inline-block items-baseline">
+            <p class="inline-block pl-2 text-lg pb-1 font-bold">
+              /{questions.length}
+            </p>
+          </div>
+        {/if}
       </div>
     </div>
   </div>
@@ -93,25 +122,42 @@
       </div>
     </div>
     <div class="w-full flex justify-center pb-4">
-      <Card question={currentQuestion} />
+      <Card question={currentQuestion} {loading} />
     </div>
   </div>
   <div class="w-full grid grid-cols-3 p-10 pb-16 md:flex md:p-6 md:pb-8">
     <div class="flex items-end md:hidden">
-      <h3 class="text-6xl font-bold">{currentQuestion.index || 0}</h3>
-      <div class="inline-block items-baseline">
-        <p class="inline-block px-2 text-xl pb-1 font-bold">/{questions.length}</p>
-      </div>
+      {#if loading}
+        <div class="shimmer shimmer-bg h-8 w-16" />
+        <div class="shimmer shimmer-bg h-6 w-10 mx-1" />
+      {:else}
+        <h3 class="text-6xl font-bold">{currentQuestion.index || 0}</h3>
+        <div class="inline-block items-baseline">
+          <p class="inline-block px-2 text-xl pb-1 font-bold">
+            /{questions.length}
+          </p>
+        </div>
+      {/if}
     </div>
     <div class="w-full text-center items-center md:flex md:justify-between">
-      <div
-        class="rounded-full social-btn p-4 cursor-pointer m-1 hidden md:inline-block"
+      <a
+        href="https://twitter.com/yihonganthony"
+        class="cursor-pointer"
+        target="_blank"
+        rel="noopener noreferrer"
+        ><div
+          class="rounded-full social-btn p-4 cursor-pointer m-1 hidden md:inline-block"
+        >
+          <img
+            src="/assets/gift.svg"
+            alt="Gift icon for social links"
+            class="icons-dark"
+          />
+        </div></a
       >
-        <img src="/assets/gift.svg" alt="Gift icon for social links" />
-      </div>
-      <div>
+      <div class="md:flex-auto">
         <button
-          class="rounded-full px-8 py-3 shuffle text-lg md:w-auto"
+          class="rounded-full px-10 py-3 shuffle text-lg w-full "
           on:click={() => {
             currentQuestion = getQuestion(currentCategory);
           }}>Shuffle</button
@@ -119,21 +165,36 @@
       </div>
       <div
         class="rounded-full social-btn p-4 cursor-pointer m-1 hidden md:inline-block"
+        on:click={toggleAbout}
       >
         <img
           src="/assets/bookmarks.svg"
           alt="Bookmarks icon for about section"
+          class="icons-dark"
         />
       </div>
     </div>
     <div class="flex justify-end md:hidden">
-      <div class="rounded-full social-btn p-4 cursor-pointer m-1">
-        <img src="/assets/gift.svg" alt="Gift icon for social links" />
-      </div>
-      <div class="rounded-full social-btn p-4 cursor-pointer m-1">
+      <a
+        href="https://twitter.com/yihonganthony"
+        target="_blank"
+        rel="noopener noreferrer"
+        ><div class="rounded-full social-btn p-4 cursor-pointer m-1">
+          <img
+            src="/assets/gift.svg"
+            alt="Gift icon for social links"
+            class="icons-dark"
+          />
+        </div>
+      </a>
+      <div
+        class="rounded-full social-btn p-4 cursor-pointer m-1"
+        on:click={toggleAbout}
+      >
         <img
           src="/assets/bookmarks.svg"
           alt="Bookmarks icon for about section"
+          class="icons-dark"
         />
       </div>
     </div>
@@ -141,12 +202,15 @@
 </main>
 
 <style>
+  .modal-setup {
+    bottom: 140px;
+  }
   .shuffle {
     background: linear-gradient(309.23deg, #ff773d 53.06%, #ff9365 85.43%);
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.15);
     color: #fdfdfd;
     font-weight: bold;
-    width: 220px;
+    max-width: 220px;
   }
 
   .selected {
@@ -170,9 +234,9 @@
     max-width: 560px;
   }
 
-	.moving-strip {
-		transition: transform 0.5s ease-in-out 0.1s;
-	}
+  .moving-strip {
+    transition: transform 0.5s ease-in-out 0.1s;
+  }
 
   .category-gradient {
     position: absolute;

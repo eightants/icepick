@@ -1,13 +1,26 @@
 <script lang="ts">
-  export let question: any;
+  import type { Question } from './types/question.type';
+
+  export let question: Question;
+  export let loading: boolean;
 </script>
 
 <main class="md:px-8 w-full justify-center flex">
   <div class="card p-8 flex flex-col rounded-xl justify-between w-full">
-    <h2 class="text-4xl mb-6 md:text-3xl">
-      {question.question}
-    </h2>
-    <p>Everyday. Icebreakers. Get to Know.</p>
+    {#if loading}
+      <div class="shimmer shimmer-bg h-8 w-full" />
+      <div class="shimmer shimmer-bg h-4 w-20" />
+    {:else}
+      <h2 class="text-4xl mb-6 md:text-3xl">
+        {question.question}
+      </h2>
+      <p>
+        {question.tags
+          .split(',')
+          .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+          .join('. ') + '. '}
+      </p>
+    {/if}
   </div>
 </main>
 

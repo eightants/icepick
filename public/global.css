@@ -1,43 +1,98 @@
-html, body {
-	position: relative;
-	width: 100%;
-	height: 100%;
+html,
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 @font-face {
-  font-family: "Lora";
-  src: url("/assets/Lora-VariableFont_wght.ttf") format("truetype");
+  font-family: 'Lora';
+  src: url('/assets/Lora-VariableFont_wght.ttf') format('truetype');
   font-weight: 1 999;
 }
 
 body {
-	color: #464443;
-	background-color: #F2F2F2;
-	margin: 0;
-	padding: 8px;
-	box-sizing: border-box;
-	font-family: "Open Sans", sans-serif;
-	letter-spacing: -0.03em;
+  color: #464443;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 8px;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: -0.03em;
 }
 
 p {
-	font-weight: 600;
-	color: #a4a4a4;
+  font-weight: 600;
+  color: #a4a4a4;
 }
 
-h1,h2 {
-	font-family: 'Lora', 'serif';
-	color: #000;
-	font-weight: 500;
+h1,
+h2,
+h4 {
+  font-family: 'Lora', 'serif';
+  color: #000;
+  font-weight: 500;
+}
+
+.icons-dark {
+	opacity: 0.5;
+}
+
+.shimmer-bg {
+  background-color: rgb(204, 204, 204);
+}
+
+.shimmer {
+  animation: k1 1.2s ease-in-out infinite;
+}
+
+@-webkit-keyframes k1 {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+@-moz-keyframes k1 {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+@keyframes k1 {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.8;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
-	body {
-			background-color: #282626;
-			color: #E0E0E0;
-	}
+  body {
+    background-color: #282626;
+    color: #e0e0e0;
+  }
 
-	h1,h2 {
-		color: #E0E0E0;
+  h1,
+  h2,
+  h4 {
+    color: #e0e0e0;
+  }
+
+	.icons-dark {
+		filter: invert(1);
 	}
 }
