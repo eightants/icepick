@@ -62,28 +62,25 @@
     const randomIndex = Math.floor(
       Math.random() * filteredQuestions.length + 1
     );
+    console.log(randomIndex);
     loading = false;
     return filteredQuestions[randomIndex];
   };
 </script>
 
-<main class="flex flex-col justify-between h-full">
+<main class="flex flex-col justify-between min-h-full">
   {#if showAbout}
-    <div class="absolute p-6 right-0 modal-setup"><Modal /></div>
+    <div class="absolute p-6 right-0 modal-setup md:p-2"><Modal /></div>
   {/if}
   <div class="w-full grid grid-cols-3 p-10 pb-4 md:p-6 md:pb-2">
     <div>
       <img src="/assets/filter.svg" alt="Filter icon" class="icons hidden" />
     </div>
-    <div class="w-full text-center">
-      <h2 class="text-2xl font-semibold">icepick.</h2>
+    <div class="w-full flex justify-center items-center">
+      <img alt="Transparent logo" src="/icepick.svg" class="w-12" />
+      <h2 class="text-2xl font-semibold md:hidden">icepick.</h2>
     </div>
     <div class="flex justify-end">
-      <img
-        src="assets/vercel.svg"
-        alt="Icepick is powered by Vercel. "
-        class="w-3/12 opacity-80 md:hidden"
-      />
       <div class="w-full flex items-end hidden md:flex md:flex-col">
         {#if loading}
           <div class="shimmer shimmer-bg h-6 w-16" />
@@ -125,7 +122,7 @@
       <Card question={currentQuestion} {loading} />
     </div>
   </div>
-  <div class="w-full grid grid-cols-3 p-10 pb-16 md:flex md:p-6 md:pb-8">
+  <div class="w-full grid grid-cols-3 p-10 pb-16 md:flex md:p-2 md:pb-8">
     <div class="flex items-end md:hidden">
       {#if loading}
         <div class="shimmer shimmer-bg h-8 w-16" />
@@ -204,6 +201,7 @@
 <style>
   .modal-setup {
     bottom: 140px;
+    /* height: calc(100% - 200px); */
   }
   .shuffle {
     background: linear-gradient(309.23deg, #ff773d 53.06%, #ff9365 85.43%);
@@ -264,6 +262,10 @@
   }
 
   @media (prefers-color-scheme: dark) {
+    .modal-setup {
+      bottom: 100px;
+      height: calc(100% - 140px);
+    }
     .social-btn {
       background: rgba(255, 255, 255, 0.1);
     }

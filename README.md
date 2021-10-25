@@ -4,6 +4,8 @@ No matter who you are talking to, the best way to have a conversation is to talk
 
 Icepick hosts a large question bank with questions from different lists across the web. Questions for any situation can be found here. Simply select the category you're interested in and click 'Shuffle'. No more awkward silences!
 
+Icepick is built with Svelte, TailwindCSS, and deployed on Vercel.
+
 ## Contribute
 
 Install the dependencies after forking and cloning the repository. 
@@ -29,4 +31,4 @@ You can run the newly built app with `npm run start`. This uses [sirv](https://g
 
 <br/>
 
-<a href="https://vercel.com?utm_source=anthill&utm_campaign=oss"><img src="./public/assets/vercel.svg"/></a>
+<a href="https://vercel.com?utm_source=anthill&utm_campaign=oss"><img width="160" src="./public/assets/vercel.svg"/></a>
