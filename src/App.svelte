@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { GoogleAnalytics } from '@beyonk/svelte-google-analytics';
   import Papa from 'papaparse';
 
   import Card from './Card.svelte';
@@ -52,7 +53,7 @@
   const getQuestion = (category: number) => {
     loading = true;
     if (category === 0) {
-      const randomIndex = Math.floor(Math.random() * questions.length + 1);
+      const randomIndex = Math.floor(Math.random() * questions.length);
       loading = false;
       return questions[randomIndex];
     }
@@ -66,18 +67,31 @@
     loading = false;
     return filteredQuestions[randomIndex];
   };
+
+  const parseIndex = (index: string | number) => Number(index) + 1;
 </script>
 
+<GoogleAnalytics
+  properties={['G-KEHY4J1CKB']}
+  configurations={{
+    'G-KEHY4J1CKB': {
+      cookie_domain: 'icepick.vercel.app',
+      cookie_flags: 'SameSite=None;Secure'
+    }
+  }}
+/>
 <main class="flex flex-col justify-between min-h-full">
   {#if showAbout}
     <div class="absolute p-6 right-0 modal-setup md:p-2"><Modal /></div>
   {/if}
-  <div class="w-full grid grid-cols-3 p-10 pb-4 md:p-6 md:pb-2">
+  <div class="w-full grid grid-cols-3 p-10 pb-4 md:p-4 md:py-2">
     <div>
       <img src="/assets/filter.svg" alt="Filter icon" class="icons hidden" />
     </div>
-    <div class="w-full flex justify-center items-center">
-      <img alt="Transparent logo" src="/icepick.svg" class="w-12" />
+    <div
+      class="w-full flex justify-center items-center md:items-start pointer-events-none"
+    >
+      <img alt="Transparent logo" src="/icepick.svg" class="w-8 mr-2" />
       <h2 class="text-2xl font-semibold md:hidden">icepick.</h2>
     </div>
     <div class="flex justify-end">
@@ -87,7 +101,7 @@
           <div class="shimmer shimmer-bg h-4 w-10 my-1" />
         {:else}
           <h3 class="text-4xl font-bold transition-all">
-            {currentQuestion.index || 0}
+            {parseIndex(currentQuestion.index) || 0}
           </h3>
           <div class="inline-block items-baseline">
             <p class="inline-block pl-2 text-lg pb-1 font-bold">
@@ -128,7 +142,9 @@
         <div class="shimmer shimmer-bg h-8 w-16" />
         <div class="shimmer shimmer-bg h-6 w-10 mx-1" />
       {:else}
-        <h3 class="text-6xl font-bold">{currentQuestion.index || 0}</h3>
+        <h3 class="text-6xl font-bold">
+          {parseIndex(currentQuestion.index) || 0}
+        </h3>
         <div class="inline-block items-baseline">
           <p class="inline-block px-2 text-xl pb-1 font-bold">
             /{questions.length}
@@ -262,10 +278,6 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    .modal-setup {
-      bottom: 100px;
-      height: calc(100% - 140px);
-    }
     .social-btn {
       background: rgba(255, 255, 255, 0.1);
     }
