@@ -11,7 +11,8 @@
     0: 'All',
     1: 'Icebreakers',
     2: 'Get to Know',
-    3: 'Business'
+    3: 'Date',
+    4: 'Business'
   };
 
   let questions = [];
@@ -61,7 +62,7 @@
       q.tags.includes(CATEGORIES[category].toLowerCase())
     );
     const randomIndex = Math.floor(
-      Math.random() * filteredQuestions.length + 1
+      Math.random() * filteredQuestions.length
     );
     console.log(randomIndex);
     loading = false;

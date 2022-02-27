@@ -69,7 +69,7 @@ index|question|tags
 68|What's your favorite movie?|icebreakers,get to know
 69|How old were you when you learned Santa wasn't real? How did you find out?|icebreakers,get to know
 70|Is your glass half full or half empty?|icebreakers,get to know
-71|What's the craziest thing you�ve done in the name of love?|icebreakers,get to know
+71|What's the craziest thing you've done in the name of love?|icebreakers,get to know
 72|What three items would you take with you on a deserted island?|icebreakers,get to know
 73|What was your favorite subject in school?|icebreakers,get to know
 74|What's the most unusual thing you've ever eaten?|icebreakers,get to know
@@ -80,7 +80,7 @@ index|question|tags
 79|Have you ever had a surprise party? (that was an actual surprise)|icebreakers,get to know
 80|Are you related or distantly related to anyone famous?|icebreakers,get to know
 81|What do you do to keep fit?|icebreakers,get to know
-82|Does your family have a �motto� spoken or unspoken?|icebreakers,get to know
+82|Does your family have a 'motto' spoken or unspoken?|icebreakers,get to know
 83|If you were ruler of your own country what would be the first law you would introduce?|icebreakers,get to know
 84|Who was your favorite teacher in school and why?|icebreakers,get to know
 85|What three things do you think of the most each day?|icebreakers,get to know
@@ -248,3 +248,36 @@ index|question|tags
 247|Would you rather have your dishes or clothes be magically clean?|get to know
 248|What's your favorite story about yourself?|get to know
 249|If you could change anything about yourself, would you? If so, what and why?|get to know
+250|What’s awesome in your life right now?|icebreakers,date,get to know
+251|What’s your go-to karaoke song?|icebreakers,date,get to know
+252|What did you think you were going to be growing up?|icebreakers,date,get to know
+253|What’s the most rebellious thing you did growing up?|icebreakers,date,get to know
+254|What’s the strangest compliment you’ve ever gotten?|icebreakers,date,get to know
+255|Are you a risk taker or someone who likes to play it safe?|icebreakers,date,get to know
+256|If you could only watch one genre of movies for the rest of your life, what would it be?|icebreakers,date,get to know
+257|Dog person, cat person, or neither?|icebreakers,date,get to know
+258|What’s your guilty pleasure?|icebreakers,date,get to know
+259|Do you have any hidden talents or surprising hobbies?|icebreakers,date,get to know
+260|What makes you smile without fail?|icebreakers,date,get to know
+261|What is your go-to comfort food?|icebreakers,date,get to know
+262|What’s the best piece of advice you’ve ever received, and why is it stuck with you?|icebreakers,date,get to know
+263|Where would you live if you had no ties to any specific place?|icebreakers,date,get to know
+264|What’s the coolest/best/funniest/worst/what have you done thing that’s happened to you lately?|icebreakers,date,get to know
+265|What were you like in high school?|icebreakers,date,get to know
+266|If you could meet anyone dead or alive, who would it be and why?|icebreakers,date,get to know
+267|What made you decide to study [insert college major]?|icebreakers,date,get to know
+268|If you could switch careers, without any concern for money, what would you do?|icebreakers,date,get to know
+269|What’s your favorite thing to do around here on the weekends?|icebreakers,date,get to know
+270|If you could fly anywhere, for free, where would you go?|icebreakers,date,get to know
+271|Are you working on any personal passion projects?|date,get to know
+272|What’s the best present you ever gave someone? Ever received?|date,get to know
+273|What does a typical day look like for you?|date,get to know
+274|Is there anything you don’t eat?|date,get to know
+275|What sort of vacations do you like to take?|date,get to know
+276|Anything surprising happen today?|date,get to know
+277|What’s the best advice anyone ever gave you?|date,get to know
+278|Tell me about your closest friends?|date,get to know
+279|What were you like as a kid?|date,get to know
+280|I’ve been watching ____ and love it. Have you seen any good movies or TV shows lately?|date,get to know
+281|Have you been to any good restaurants recently?|date,get to know
+282|Do you have any pet peeves?|date,get to know
